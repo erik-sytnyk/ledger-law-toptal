@@ -5,6 +5,7 @@ node_modules/
 dist/
 build/
 .vite/
+temp_vite/
 
 # Environment
 .env

@@ -1,11 +1,13 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState } from "react";
 
 const T={bg:"#F4F6F9",srf:"#FFF",srfAlt:"#F8F9FC",hov:"#EDF0F5",bdr:"#DEE3EB",bdrL:"#EAEFF5",
 steel:"#4A6E8B",steelD:"#3B5E7A",steelL:"#6A92B0",steelDim:"rgba(74,110,139,.07)",
 sage:"#5B7A6B",gold:"#9A7E3A",tx:"#1B2838",tx2:"#3A4F63",txM:"#6B8093",txD:"#9CAEB9",
-green:"#2D8A55",greenDim:"rgba(45,138,85,.07)",red:"#C0392B",redDim:"rgba(192,57,43,.06)",
-warn:"#B8860B",warnDim:"rgba(184,134,11,.10)",purple:"#6D4C9F",purpleDim:"rgba(109,76,159,.10)",
-blue:"#2E7CB8",blueDim:"rgba(46,124,184,.10)",white:"#FFF",
+green:"#2D8A55",greenDim:"rgba(45,138,85,.07)",grn:"#2D8A55",grnDim:"rgba(45,138,85,.07)",
+red:"#C0392B",redDim:"rgba(192,57,43,.06)",warn:"#B8860B",warnDim:"rgba(184,134,11,.10)",
+purple:"#6D4C9F",purpleDim:"rgba(109,76,159,.10)",pur:"#6D4C9F",
+blue:"#2E7CB8",blueDim:"rgba(46,124,184,.10)",blu:"#2E7CB8",bluDim:"rgba(46,124,184,.10)",
+white:"#FFF",
 sb:"#1B2838",sbTx:"#B0C4D6",sbAct:"#FFF",sbAc:"#5B9BD5",sbH:"rgba(91,155,213,.12)",sbD:"rgba(255,255,255,.08)"};
 
 const css=`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -93,6 +95,9 @@ del:sv(<><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 
 shld:sv(<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>,14),
 clip:sv(<><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></>),
 clk:sv(<><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></>,15),
+star:sv(<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>),
+scl:sv(<><path d="M16 3l5 5-5 5"/><path d="M21 8H9"/><path d="M8 21l-5-5 5-5"/><path d="M3 16h12"/></>),
+warn:sv(<><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></>),
 };
 
 const Btn=({children,v="primary",sz="md",icon,onClick,disabled,style:st})=>{

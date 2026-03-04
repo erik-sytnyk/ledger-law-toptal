@@ -1,0 +1,16 @@
+---
+description: Repository language — all text in English
+alwaysApply: true
+---
+
+# Repository Language
+
+All text in this repository must be in **English**:
+
+- Documentation (README, DEVELOPMENT_LOG, CHANGELOG, etc.)
+- Code comments
+- Commit messages
+- Variable/function names (English)
+- UI strings intended for developers (e.g., dev tooltips, debug logs)
+
+Exception: User-facing UI in the app may use other languages if required by the product.
