@@ -11,7 +11,7 @@ Current stage: **Day 1 — Setup & Deploy**
 | 1 | Init Vite + React | ✅ Done |
 | 2 | Integrate JSX prototype | ✅ Done |
 | 3 | Fix bugs (icons, colors) | ✅ Done |
-| 4 | React Router | — |
+| 4 | React Router | ✅ Done |
 | 5 | Deploy to Vercel | — |
 
 ---
@@ -35,3 +35,11 @@ Current stage: **Day 1 — Setup & Deploy**
 - Import simplified to `useState` only
 
 **Result:** `npm run build` succeeds, 18 pages working
+
+### 2026-03-04 — React Router
+
+**Added:**
+- `react-router-dom` — URL-based navigation
+- Routes: `/`, `/cases`, `/intake`, `/new`, `/colossus`, `/objections`, `/casevalue`, `/chrono`, `/damages`, `/verdicts`, `/icd`, `/chat`, `/ediscovery`, `/contracts`, `/drafts`, `/users`, `/settings`
+- `AppLayout` — uses `useNavigate`, `useLocation` for sidebar sync
+- Catch-all `*` route → Dashboard

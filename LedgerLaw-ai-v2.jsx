@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 const T={bg:"#F4F6F9",srf:"#FFF",srfAlt:"#F8F9FC",hov:"#EDF0F5",bdr:"#DEE3EB",bdrL:"#EAEFF5",
 steel:"#4A6E8B",steelD:"#3B5E7A",steelL:"#6A92B0",steelDim:"rgba(74,110,139,.07)",
@@ -466,19 +467,41 @@ const Settings=()=>(<div><PH title="Settings" sub="Configure integrations, AI, s
 </div></div>);
 
 // ════════════════════════════════════════════════════════════════
-// MAIN APP — 18 pages wired to sidebar
+// MAIN APP — 18 pages with React Router
 // ════════════════════════════════════════════════════════════════
+function AppLayout(){
+  const navigate=useNavigate();
+  const location=useLocation();
+  const pg=location.pathname==="/"?"dash":location.pathname.slice(1)||"dash";
+  const go=(key)=>navigate(key==="dash"?"/":`/${key}`);
+  return(<><style>{css}</style>
+  <Sidebar pg={pg} go={go}/>
+  <div style={{marginLeft:226,padding:"20px 24px 50px",minHeight:"100vh"}}>
+    <Routes>
+      <Route path="/" element={<Dashboard go={go}/>}/>
+      <Route path="/cases" element={<CasesView go={go}/>}/>
+      <Route path="/intake" element={<Intake/>}/>
+      <Route path="/new" element={<NewDemand/>}/>
+      <Route path="/colossus" element={<ReverseColossus/>}/>
+      <Route path="/objections" element={<CarrierObjections/>}/>
+      <Route path="/casevalue" element={<CaseValuation/>}/>
+      <Route path="/chrono" element={<MedChronology/>}/>
+      <Route path="/damages" element={<DamagesCalc/>}/>
+      <Route path="/verdicts" element={<VerdictResearch/>}/>
+      <Route path="/icd" element={<ICDEngine/>}/>
+      <Route path="/chat" element={<AICaseChat/>}/>
+      <Route path="/ediscovery" element={<EDiscovery/>}/>
+      <Route path="/contracts" element={<ContractReview/>}/>
+      <Route path="/drafts" element={<AIDrafts/>}/>
+      <Route path="/users" element={<UsersView/>}/>
+      <Route path="/settings" element={<Settings/>}/>
+      <Route path="*" element={<Dashboard go={go}/>}/>
+    </Routes>
+  </div>
+  <div style={{position:"fixed",bottom:0,left:226,right:0,height:28,background:T.wh,borderTop:`1px solid ${T.bdr}`,display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
+    <span style={{color:T.txD,fontSize:10,letterSpacing:".02em"}}>{I.shld} Attorney-Client Privileged & Confidential — The Ledger Law Firm — 949-244-2800</span>
+  </div></>);
+}
 export default function App(){
-  const[pg,setPg]=useState("dash");
-  const pages={dash:<Dashboard go={setPg}/>,cases:<CasesView go={setPg}/>,intake:<Intake/>,new:<NewDemand/>,colossus:<ReverseColossus/>,objections:<CarrierObjections/>,casevalue:<CaseValuation/>,chrono:<MedChronology/>,damages:<DamagesCalc/>,verdicts:<VerdictResearch/>,icd:<ICDEngine/>,chat:<AICaseChat/>,ediscovery:<EDiscovery/>,contracts:<ContractReview/>,drafts:<AIDrafts/>,users:<UsersView/>,settings:<Settings/>};
-  return(
-    <><style>{css}</style>
-    <Sidebar pg={pg} go={setPg}/>
-    <div style={{marginLeft:226,padding:"20px 24px 50px",minHeight:"100vh"}}>
-      {pages[pg]||<Dashboard go={setPg}/>}
-    </div>
-    <div style={{position:"fixed",bottom:0,left:226,right:0,height:28,background:T.wh,borderTop:`1px solid ${T.bdr}`,display:"flex",alignItems:"center",justifyContent:"center",zIndex:100}}>
-      <span style={{color:T.txD,fontSize:10,letterSpacing:".02em"}}>{I.shld} Attorney-Client Privileged & Confidential — The Ledger Law Firm — 949-244-2800</span>
-    </div></>
-  );
+  return <BrowserRouter><AppLayout/></BrowserRouter>;
 }
