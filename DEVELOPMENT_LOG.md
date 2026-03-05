@@ -12,7 +12,7 @@ Current stage: **Day 1 — Setup & Deploy**
 | 2 | Integrate JSX prototype | ✅ Done |
 | 3 | Fix bugs (icons, colors) | ✅ Done |
 | 4 | React Router | ✅ Done |
-| 5 | Deploy to Vercel | — |
+| 5 | Deploy to Vercel | ✅ Ready (connect repo) |
 
 ---
 
@@ -43,3 +43,9 @@ Current stage: **Day 1 — Setup & Deploy**
 - Routes: `/`, `/cases`, `/intake`, `/new`, `/colossus`, `/objections`, `/casevalue`, `/chrono`, `/damages`, `/verdicts`, `/icd`, `/chat`, `/ediscovery`, `/contracts`, `/drafts`, `/users`, `/settings`
 - `AppLayout` — uses `useNavigate`, `useLocation` for sidebar sync
 - Catch-all `*` route → Dashboard
+
+### 2026-03-04 — Vercel config
+
+**Added:**
+- `vercel.json` — SPA rewrites for React Router
+- `DEPLOY.md` — Vercel deployment instructions
