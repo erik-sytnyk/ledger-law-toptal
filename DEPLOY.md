@@ -25,7 +25,7 @@
 
 ## SPA Routing
 
-`vercel.json` rewrites all routes to `index.html` so React Router works on direct links and refresh.
+`vercel.json` rewrites routes to `index.html` (SPA) except `/api/*` which goes to serverless functions.
 
 ---
 
@@ -45,6 +45,36 @@ See **[CLERK_SETUP.md](./CLERK_SETUP.md)** for step-by-step setup.
 **Summary:** Create app at [clerk.com](https://clerk.com) → copy Publishable key → add to `.env` as `VITE_CLERK_PUBLISHABLE_KEY` → add redirect URLs.
 
 **Note:** Without `VITE_CLERK_PUBLISHABLE_KEY`, the app runs without auth (demo mode).
+
+---
+
+## Day 3: Backend & AI
+
+### Anthropic API
+
+1. Get API key at [console.anthropic.com](https://console.anthropic.com)
+2. Add to **Vercel** → Project → Settings → Environment Variables:
+   - `ANTHROPIC_API_KEY` (server-side only; never expose to browser)
+
+### Local API Testing
+
+`npm run dev` serves both frontend and API (via Vite plugin that handles `/api/*` routes).
+
+Ensure `ANTHROPIC_API_KEY` is set in `.env`, then:
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:5173` — everything works locally.
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|--------------|
+| `/api/generate-demand` | POST | Generate demand letter via Claude Sonnet 4 |
+
+Rate limit: 100 requests per 15 minutes per IP.
 
 ---
 

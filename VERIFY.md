@@ -106,11 +106,24 @@ To verify Supabase connection:
 
 ---
 
-## 4. Quick Commands
+## 4. API (Day 3)
+
+**Local with API:** `npx vercel dev` (runs frontend + `/api` on port 3000)
+
+**Vercel env:** Add `ANTHROPIC_API_KEY` (from [console.anthropic.com](https://console.anthropic.com))
+
+**Test:** New Demand → Step 1–3 → Generate Demand → real AI output in Step 4
+
+---
+
+## 5. Quick Commands
 
 ```bash
-# Local dev
+# Local dev (frontend only)
 npm run dev
+
+# Local dev with API (frontend + /api)
+npx vercel dev
 
 # Local production build
 npm run build && npm run preview

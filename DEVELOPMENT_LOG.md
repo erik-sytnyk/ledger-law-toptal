@@ -1,6 +1,6 @@
 # LedgerLaw.ai — Development Log
 
-Current stage: **Day 2 — Database & Auth**
+Current stage: **Day 3 — Backend & AI**
 
 ---
 
@@ -21,6 +21,15 @@ Current stage: **Day 2 — Database & Auth**
 | 1 | Supabase PostgreSQL schema | ✅ Done |
 | 2 | Clerk Auth | ✅ Done |
 | 3 | RBAC (profiles.role) | ✅ Schema ready |
+
+## Day 3: Backend & AI
+
+| # | Task | Status |
+|---|------|--------|
+| 1 | Express/API serverless (Vercel) | ✅ Done |
+| 2 | Anthropic Claude integration | ✅ Done |
+| 3 | Rate limiting (100 req/15min) | ✅ Done |
+| 4 | New Demand → real API | ✅ Done |
 
 ---
 
@@ -69,3 +78,16 @@ Current stage: **Day 2 — Database & Auth**
 - `.env.example` — VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY, VITE_CLERK_PUBLISHABLE_KEY
 
 **Behavior:** Without `VITE_CLERK_PUBLISHABLE_KEY`, app runs in demo mode (no auth). With key, sign-in required.
+
+### 2026-03-05 — Day 3: Backend & AI
+
+**Added:**
+- `api/generate-demand.js` — Vercel serverless function, Anthropic Claude Sonnet 4, rate limiting (100/15min)
+- `src/lib/api.js` — Frontend API client
+- New Demand page → real AI generation (case data from Step 1 → Claude → demand text in Step 4)
+- `vercel.json` — Exclude `/api/*` from SPA rewrite
+- `@anthropic-ai/sdk` — Anthropic API client
+
+**Env:** `ANTHROPIC_API_KEY` in Vercel (server-side only). `VITE_API_URL` optional for local dev.
+
+**Fix:** index.html title simplified to "LedgerLaw" — Vite import-analysis misparses "." in HTML (incl. comments) as JS. TODO: restore "LedgerLaw.ai" when Vite fixes or workaround found.
