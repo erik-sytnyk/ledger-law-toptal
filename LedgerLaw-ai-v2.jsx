@@ -115,7 +115,7 @@ const SC=({label,value,sub,icon,color:c=T.steel})=><Card style={{display:"flex",
 const PBar=({pct,color:c=T.steel})=><div style={{height:6,borderRadius:3,background:T.hov,overflow:"hidden"}}><div style={{height:"100%",width:`${pct}%`,borderRadius:3,background:c,transition:"width .5s"}}/></div>;
 
 // ════════════════ SIDEBAR ════════════════
-const Sidebar=({pg,go})=>{
+const Sidebar=({pg,go,userSlot})=>{
 const nav=[{k:"dash",l:"Dashboard",i:I.dash},{k:"cases",l:"Cases",i:I.folder},{k:"intake",l:"Intake Screening",i:I.clip},{k:"new",l:"New Demand",i:I.fp},"d",{k:"colossus",l:"Reverse Colossus™",i:I.tgt},{k:"objections",l:"Carrier Objections",i:I.alrt},{k:"casevalue",l:"Case Valuation",i:I.dol},"d",{k:"chrono",l:"Med Chronology",i:I.act},{k:"damages",l:"Damages Calc",i:I.calc},{k:"verdicts",l:"Verdict Research",i:I.srch},{k:"icd",l:"ICD Code Engine",i:I.brain},"d",{k:"chat",l:"AI Case Chat",i:I.chat},{k:"ediscovery",l:"eDiscovery",i:I.eye},{k:"contracts",l:"Contract Review",i:I.doc},{k:"drafts",l:"AI Drafts Suite",i:I.scale},"d",{k:"users",l:"Team & Users",i:I.users},{k:"settings",l:"Settings",i:I.gear}];
 return(<div style={{width:226,height:"100vh",background:T.sb,display:"flex",flexDirection:"column",position:"fixed",left:0,top:0,zIndex:200}}>
 <div style={{padding:"14px 14px 10px",borderBottom:`1px solid ${T.sbD}`}}>
@@ -125,7 +125,7 @@ return(<div style={{width:226,height:"100vh",background:T.sb,display:"flex",flex
 <div style={{fontSize:8.5,color:T.sbTx,opacity:.6,letterSpacing:".08em",textTransform:"uppercase"}}>.ai · Intelligence Platform</div></div>
 </div></div>
 <div style={{flex:1,padding:"6px 6px",overflowY:"auto"}}>{nav.map((it,i)=>it==="d"?<div key={i} style={{height:1,background:T.sbD,margin:"4px 8px"}}/>:(<div key={it.k} onClick={()=>go(it.k)} style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",borderRadius:7,cursor:"pointer",color:pg===it.k?T.sbAct:T.sbTx,background:pg===it.k?T.sbH:"transparent",fontWeight:pg===it.k?600:500,fontSize:11.5,transition:"all .15s",marginBottom:1}}><span style={{opacity:pg===it.k?1:.5,flexShrink:0}}>{it.i}</span>{it.l}</div>))}</div>
-<div style={{padding:"8px 12px",borderTop:`1px solid ${T.sbD}`,display:"flex",alignItems:"center",gap:8}}><div style={{width:28,height:28,borderRadius:"50%",background:T.sbH,display:"flex",alignItems:"center",justifyContent:"center",color:T.sbAc,fontSize:11,fontWeight:700}}>EL</div><div><div style={{color:T.sbAct,fontSize:11.5,fontWeight:600}}>E. Ledger</div><div style={{color:T.sbTx,fontSize:9.5,opacity:.7}}>Partner</div></div></div>
+<div style={{padding:"8px 12px",borderTop:`1px solid ${T.sbD}`,display:"flex",alignItems:"center",gap:8}}>{userSlot||<><div style={{width:28,height:28,borderRadius:"50%",background:T.sbH,display:"flex",alignItems:"center",justifyContent:"center",color:T.sbAc,fontSize:11,fontWeight:700}}>EL</div><div><div style={{color:T.sbAct,fontSize:11.5,fontWeight:600}}>E. Ledger</div><div style={{color:T.sbTx,fontSize:9.5,opacity:.7}}>Partner</div></div></>}</div>
 </div>);};
 
 // ════════════════ DASHBOARD ════════════════
@@ -469,13 +469,13 @@ const Settings=()=>(<div><PH title="Settings" sub="Configure integrations, AI, s
 // ════════════════════════════════════════════════════════════════
 // MAIN APP — 18 pages with React Router
 // ════════════════════════════════════════════════════════════════
-function AppLayout(){
+function AppLayout({userSlot}){
   const navigate=useNavigate();
   const location=useLocation();
   const pg=location.pathname==="/"?"dash":location.pathname.slice(1)||"dash";
   const go=(key)=>navigate(key==="dash"?"/":`/${key}`);
   return(<><style>{css}</style>
-  <Sidebar pg={pg} go={go}/>
+  <Sidebar pg={pg} go={go} userSlot={userSlot}/>
   <div style={{marginLeft:226,padding:"20px 24px 50px",minHeight:"100vh"}}>
     <Routes>
       <Route path="/" element={<Dashboard go={go}/>}/>
@@ -502,6 +502,7 @@ function AppLayout(){
     <span style={{color:T.txD,fontSize:10,letterSpacing:".02em"}}>{I.shld} Attorney-Client Privileged & Confidential — The Ledger Law Firm — 949-244-2800</span>
   </div></>);
 }
+export { AppLayout };
 export default function App(){
   return <BrowserRouter><AppLayout/></BrowserRouter>;
 }

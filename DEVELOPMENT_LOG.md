@@ -1,6 +1,6 @@
 # LedgerLaw.ai — Development Log
 
-Current stage: **Day 1 — Setup & Deploy**
+Current stage: **Day 2 — Database & Auth**
 
 ---
 
@@ -12,7 +12,15 @@ Current stage: **Day 1 — Setup & Deploy**
 | 2 | Integrate JSX prototype | ✅ Done |
 | 3 | Fix bugs (icons, colors) | ✅ Done |
 | 4 | React Router | ✅ Done |
-| 5 | Deploy to Vercel | ✅ Ready (connect repo) |
+| 5 | Deploy to Vercel | ✅ Done |
+
+## Day 2: Database & Auth
+
+| # | Task | Status |
+|---|------|--------|
+| 1 | Supabase PostgreSQL schema | ✅ Done |
+| 2 | Clerk Auth | ✅ Done |
+| 3 | RBAC (profiles.role) | ✅ Schema ready |
 
 ---
 
@@ -49,3 +57,15 @@ Current stage: **Day 1 — Setup & Deploy**
 **Added:**
 - `vercel.json` — SPA rewrites for React Router
 - `DEPLOY.md` — Vercel deployment instructions
+
+### 2026-03-04 — Day 2: Supabase & Clerk
+
+**Added:**
+- `supabase/migrations/001_initial_schema.sql` — profiles, carriers, cases, demands, documents, verdicts, RLS, seed carriers
+- `@clerk/react` — auth with SignIn, SignUp, Show, RedirectToSignIn, UserButton
+- `@supabase/supabase-js` — DB client
+- `src/lib/supabase.js` — Supabase client (uses env vars)
+- `src/App.jsx` — ClerkProvider, auth routes (/sign-in, /sign-up), ProtectedRoute, UserButton in sidebar
+- `.env.example` — VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY, VITE_CLERK_PUBLISHABLE_KEY
+
+**Behavior:** Without `VITE_CLERK_PUBLISHABLE_KEY`, app runs in demo mode (no auth). With key, sign-in required.
